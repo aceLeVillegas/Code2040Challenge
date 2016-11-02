@@ -9,7 +9,7 @@ keys = {"token": "", "github": "https://github.com/aceLeVillegas/Code2040Challen
 #sends a request to retrieve the dictionary
 search = requests.post("http://challenge.code2040.org/api/prefix", keys)
 
-#print(search.text)
+print(search.text)
 
 #Makes the texts into a json dictionary
 dict = json.loads(search.text)
@@ -28,6 +28,13 @@ for i in range(len(arra)):
 
         found.append(arra[i])
 
-#print(found)
+print(found)
 
 #Create the key that contains the new array and the token
+answerKey = {"token": "", "array": found}
+
+#Sends to the API the answerKey
+#Since I had a seperated it in a JSON dictionary needed to return it to the API as a JSON object
+answer = requests.post("http://challenge.code2040.org/api/prefix/validate", json =answerKey)
+
+print(answer.text)
